@@ -36,6 +36,28 @@ class MainActivity : AppCompatActivity() {
             PendingIntent.FLAG_IMMUTABLE
         )
 
+        // action button 1
+        val intent2 = Intent(this, DetailsActivity::class.java)
+        val pendingIntent2: PendingIntent = PendingIntent.getActivity(
+            this,
+            0,
+            intent2,
+            PendingIntent.FLAG_IMMUTABLE
+        )
+        val action2: NotificationCompat.Action =
+            NotificationCompat.Action.Builder(0, "Details", pendingIntent2).build()
+
+        // action button 2
+        val intent3 = Intent(this, SettingActivity::class.java)
+        val pendingIntent3: PendingIntent = PendingIntent.getActivity(
+            this,
+            0,
+            intent3,
+            PendingIntent.FLAG_IMMUTABLE
+        )
+        val action3: NotificationCompat.Action =
+            NotificationCompat.Action.Builder(0, "Setting", pendingIntent3).build()
+
         val notification = NotificationCompat.Builder(this@MainActivity, channelID)
             .setContentTitle("Demo Title")
             .setContentText("This is a demo notification")
@@ -43,6 +65,8 @@ class MainActivity : AppCompatActivity() {
             .setAutoCancel(true)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(pendingIntent)
+            .addAction(action2)
+            .addAction(action3)
             .build()
         notificationManager?.notify(notificationId, notification)
     }
